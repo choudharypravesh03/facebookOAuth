@@ -13,7 +13,6 @@
 
 
     <style>
-        /* CSS goes here. */
         .subunit {
             fill: none;
             stroke: #FFF;
@@ -36,11 +35,6 @@
             stroke-width: .5px;
         }
     </style>
-
-
-    <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-    <![endif]-->
 </head>
 
 <body>
@@ -53,8 +47,6 @@
 <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script>
-    /* JavaScript goes here. */
-    // globals used in graph
     var mapdata = {};
     var palette = ['#009933','#669900','#99cc00','#cccc00','#c7dc09','#edf933','#ffcc00', '#ff9933', '#ff6600','#ff5050'];
     var width = 960, height = 960;
@@ -169,8 +161,6 @@
     }
 
     function coutryclicked(datum, index) {
-        //filter event for this country should be applied here
-        console.log('coutryclicked datum', datum);
     }
     function heatColor(d) {
         if (quantiles['0.95'] === 0 && minDocCount === 0) return '#F0F0F0';

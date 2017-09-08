@@ -5,16 +5,11 @@
     <meta charset="utf-8">
 
     <title>Zeta Project</title>
-    <meta name="description" content="Zeta Project">
-    <meta name="author" content="Zeta Project">
+    <meta name="description" content="NTS Project">
+    <meta name="author" content="NTS Project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
 
-    <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-    <![endif]-->
 </head>
 
 <body>
@@ -32,11 +27,11 @@
 
         FB.getLoginStatus(function(response) {
             if(response.status === 'connected') {
-                alert('We are connected');
+                console.log('We are connected');
             } else if(response.status === 'not_authorized') {
-                alert('You are not logged in')
+                console.log('You are not logged in')
             } else {
-                alert("You are not logged into Facebook");
+                console.log("You are not logged into Facebook");
             }
         })
     };
@@ -52,7 +47,7 @@
 
     function basicAPIRequest() {
         FB.api('/me',
-            {fields: "id,about,age_range, user_friends,birthday,context,likes,email,first_name,gender,hometown,link,location,middle_name,name,timezone,website,work"},
+            {fields: "id,about,age_range,birthday,context,likes,email,first_name,gender,hometown,link,location,middle_name,name,timezone,website,work"},
             function(response) {
                 console.log('API response', response);
                 localStorage.userData = JSON.stringify(response);
@@ -64,12 +59,12 @@
     function login() {
         FB.login(function(response) {
             if(response.status === 'connected') {
-                alert('We are connected');
+                console.log('We are connected');
                 basicAPIRequest();
             } else if(response.status === 'not_authorized') {
-                alert('You are not logged in')
+                console.log('You are not logged in')
             } else {
-                alert("You are not logged into Facebook");
+                console.log("You are not logged into Facebook");
             }
         })
     }
@@ -80,7 +75,7 @@
 
 <section class="login-container">
     <div class="login-form-container">
-        <form action="/action_page.php">
+        <form>
             <div class="imgcontainer">
                 <img src="images/news.jpeg" alt="news" class="avatar">
             </div>
@@ -98,7 +93,7 @@
             <div class="container" style="background-color:#f1f1f1">
                <!-- <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
                 <button onclick="login()" type="button" class="cancelbtn"
-                        data-scope="email, user_posts, user_friends, user_likes, user_birthday,user_hometown,user_location,user_website,user_work_history,user_about_me"
+                        data-scope="email, user_posts, user_likes, user_birthday,user_hometown,user_location,user_website,user_work_history,user_about_me"
                         data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false">
                     <div class="flex-container">
                         <div class="fb-image">
