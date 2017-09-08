@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Zeta Project</title>
+    <meta name="description" content="Zeta Project">
+    <meta name="author" content="Zeta Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!-----------------facebook sdk---------------------------->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId            : '112266842803623',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v2.10'
+        });
+        FB.AppEvents.logPageView();
+
+        FB.getLoginStatus(function(response) {
+            if(response.status === 'connected') {
+                alert('We are connected');
+            } else if(response.status === 'not_authorized') {
+                alert('You are not logged in')
+            } else {
+                alert("You are not logged into Facebook");
+            }
+        })
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    function basicAPIRequest() {
+        FB.api('/me',
+            {fields: "id,about,age_range, user_friends,birthday,context,likes,email,first_name,gender,hometown,link,location,middle_name,name,timezone,website,work"},
+            function(response) {
+                console.log('API response', response);
+                localStorage.userData = JSON.stringify(response);
+                window.location.href= "./welcome_page.html";
+            }
+        );
+    }
+
+    function login() {
+        FB.login(function(response) {
+            if(response.status === 'connected') {
+                alert('We are connected');
+                basicAPIRequest();
+            } else if(response.status === 'not_authorized') {
+                alert('You are not logged in')
+            } else {
+                alert("You are not logged into Facebook");
+            }
+        })
+    }
+</script>
+<!----------------------------------------------------------->
+
+
+
+<section class="login-container">
+    <div class="login-form-container">
+        <form action="/action_page.php">
+            <div class="imgcontainer">
+                <img src="images/news.jpeg" alt="news" class="avatar">
+            </div>
+            <div class="container">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit">Login</button>
+                <input type="checkbox" checked="checked"> Remember me
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+               <!-- <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
+                <button onclick="login()" type="button" class="cancelbtn"
+                        data-scope="email, user_posts, user_friends, user_likes, user_birthday,user_hometown,user_location,user_website,user_work_history,user_about_me"
+                        data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false">
+                    <div class="flex-container">
+                        <div class="fb-image">
+                            <img src="images/fb_image.png" width="20px">
+                        </div>&nbsp;&nbsp;
+                        <div>Login with facebook</div>
+                    </div>
+                </button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
+</section>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+</body>
+</html>
